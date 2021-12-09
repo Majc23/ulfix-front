@@ -30,7 +30,7 @@ export const usersReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 users: state.users.map(
-                    user => user.id === action.payload.id
+                    user => user._id === action.payload.id
                         ? action.payload.user
                         : user
                 )
@@ -40,14 +40,8 @@ export const usersReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 active: null,
-                users: state.users.filter( user => user.id !== action.payload )
+                users: state.users.filter( user => user._id !== action.payload )
             } 
-        
-        case types.usersChangeSave:
-            return {
-                ...state,
-                save: true
-            }
 
         case types.usersLogoutCleaning:
             return {

@@ -2,7 +2,6 @@ import Swal from 'sweetalert2';
 
 import { types } from '../types/types';
 import { startLoading, finishLoading } from './ui';
-//import { startLoadingUsers } from './users';
 import { createUser, loginUser, getUsers } from "../API";
 
 export const startLoginEmailPassword = (email, password) => {
@@ -11,7 +10,6 @@ export const startLoginEmailPassword = (email, password) => {
         dispatch( startLoading() );
 
         let accessToken = await loginUser(email, password );
-            console.log(accessToken);
             localStorage.setItem("acessToken", JSON.stringify(accessToken));
             
             dispatch(
@@ -21,8 +19,6 @@ export const startLoginEmailPassword = (email, password) => {
             const users = await getUsers( accessToken.accessToken );
 
             dispatch( setUsers( users.users ) );
-            console.log( users.users )
-            //dispatch( startLoadingUsers( accessToken.accessToken ) );
             dispatch( finishLoading() );
         
     }
@@ -30,9 +26,8 @@ export const startLoginEmailPassword = (email, password) => {
 
 export const startRegisterWithEmailPasswordName = ( name,email,password ) => {
     return ( dispatch ) => {
-        createUser(name,email,password).then( async( {name, _id, email, password} ) => {
-            let accessToken = await loginUser(email, password );
-            console.log(accessToken);
+        createUser(name,email,password).then( async( {name, _id, email} ) => {
+            const accessToken = await loginUser(email, password );
             localStorage.setItem("acessToken", JSON.stringify(accessToken));
             
             dispatch(
@@ -41,8 +36,6 @@ export const startRegisterWithEmailPasswordName = ( name,email,password ) => {
             const users = await getUsers( accessToken.accessToken );
 
             dispatch( setUsers( users.users ) );
-            console.log( users.users )
-            //dispatch( startLoadingUsers( accessToken.accessToken ) );
 
         })
         .catch( e => {

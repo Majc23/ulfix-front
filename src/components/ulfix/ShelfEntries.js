@@ -15,7 +15,6 @@ export const ShelfEntries = () => {
             Usuarios
             </h2>
             {
-                //Revisar para hacer la division de shelf
                 users
                   .map( user => (
                     <ShelfEntry 
