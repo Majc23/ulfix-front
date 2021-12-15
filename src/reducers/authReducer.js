@@ -1,29 +1,40 @@
 import { types } from '../types/types';
+
 const initialState = {
-    uid: null,
-    name: null,
-    login: false
+    loading: false,
+    msgError: null
 }
-export const authReducer = ( state = initialState, action ) => {
+
+
+export const uiReducer = ( state = initialState, action ) => {
 
     switch ( action.type ) {
-        case types.login:
+        case types.uiSetError:
             return {
-                uid: action.payload.uid,
-                name: action.payload.displayName,
-                login: true
+                ...state,
+                msgError: action.payload
             }
 
-        case types.logout:
+        case types.uiRemoveError:
                 return {
-                    uid: null,
-                    name: null,
-                    login: false
-                 }
-    
+                    ...state,
+                    msgError: null
+                }
+
+        case types.uiStartLoading:
+            return {
+                ...state,
+                loading: true
+            }
+ 
+        case types.uiFinishLoading:
+            return {
+                ...state,
+                loading: false
+            }
+
         default:
             return state;
     }
 
 }
-
