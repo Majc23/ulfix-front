@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { useForm } from '../../hooks/useForm';
-import { activeNote } from '../../actions/users';
+import { activeUser } from '../../actions/users';
 import { UserAppBar } from './UserAppBar';
-//import { activeNote, startDeleting } from '../../actions/users';
+import { startDeleting } from '../../actions/users';
 
 export const UserScreen = () => {
 
@@ -21,7 +21,6 @@ export const UserScreen = () => {
     const activeUpdate = useRef( user.updatedAt  );
 
     useEffect(() => {
-        //|| note.shelf !== activeShelf.current
         if ( user.id !== activeId.current  ) {
             reset( user );
             activeId.current = user.id
@@ -47,13 +46,13 @@ export const UserScreen = () => {
 
     useEffect(() => {
         
-        dispatch( activeNote( formValues.id, { ...formValues } ) );
+        dispatch( activeUser( formValues.id, { ...formValues } ) );
 
     }, [formValues, dispatch])
-    /*
+    
     const handleDelete = () => {
         dispatch( startDeleting( id ) );
-    }*/
+    }
 
     return (
         <div className="notes__main-content">
@@ -97,7 +96,12 @@ export const UserScreen = () => {
                 {
                     (idLogin === id) 
                     && (
-                        <button className="btn btn-danger">Delete</button>
+                        <button 
+                            className="btn btn-danger"
+                            onClick={ handleDelete }
+                        >
+                            Delete
+                        </button>
                     )
                 }
            
