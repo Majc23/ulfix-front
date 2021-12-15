@@ -16,28 +16,6 @@ import { PrivateRoute } from './PrivateRoute';
 export const AppRouter = () => {
 
     const { login } = useSelector( state => state.auth );
-    /*
-    const dispatch = useDispatch();
-
-    const [ checking, setChecking ] = useState(true);
-    const [ isLoggedIn, setIsLoggedIn ] = useState(false);
-
-
-
-    useEffect(() => {
-        console.log(auth.uid);
-        if(auth?.uid){
-            //dispatch( login( auth.uid, user.displayName ) );
-                setIsLoggedIn( true );
-        } else {
-            setIsLoggedIn( false );
-        }
-        
-    }, [   setIsLoggedIn ])
-
-    */
-   
-
     
     return (
         <Router>
