@@ -3,14 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { logout } from '../../actions/auth';
-/*
-import { startSaveNote, startUploading } from '../../actions/notes';
-import Swal from 'sweetalert2';
 
-import { useForm } from '../../hooks/useForm';
-
-import { activeNote } from '../../actions/notes';
-*/
 
 export const AppBar = () => {
 
