@@ -1,34 +1,54 @@
 import React from 'react';
-//import { useDispatch, useSelector } from 'react-redux';
-//import { startSaveNote, startUploading } from '../../actions/notes';
-//import Swal from 'sweetalert2';
+import { useDispatch, useSelector } from 'react-redux';
 
-//import { useForm } from '../../hooks/useForm';
+import Swal from 'sweetalert2';
+import validator from 'validator';
 
-//import { activeNote } from '../../actions/notes';
+import { startSaveUser } from '../../actions/users';
+
 
 export const UserAppBar = () => {
 
+    
+    const dispatch = useDispatch();
+    const { active } = useSelector( state => state.users );
+
+    
+
+    
+
+
+
+    const handleSave = () => {
+        if( isFormValid() ){
+            dispatch( startSaveUser( active ) );
+        }
+    }
+
+    const isFormValid = () => {
+        if( active.name.length === 0 ){
+            Swal.fire('Warning', 'Name is required' , 'warning');
+            return false;
+        } else if( !validator.isEmail( active.email ) ){
+                Swal.fire('Warning', 'Email is not valid' , 'warning');
+                return false;
+        }
+        return true;
+    }
+    
     return (
         <div className="notes__appbar">
-            {//<span>28 de agosto 2020</span>
-            }
+           
             
 
             <div>
                 <button 
                 className="btn btn-primary-3"
-                    
+                onClick={ handleSave }
                 >
                     Save
                 </button>
-                {
-                        /*Redondear el boton
-                        no se nota el cambio
-                            desactivar boton cuando no esten llenos los campos
-
-                        */
-                    }
+                
             </div>
         </div>
     )
